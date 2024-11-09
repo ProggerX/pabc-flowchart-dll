@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v30
+      - run: "nix-channel --add https://nixos.org/channels/nixos-24.05 nixpkgs"
+      - run: nix-channel --update
       - run: nix-build
       - run: cp result res.dll
       - uses: actions/upload-artifact@v4
