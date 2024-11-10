@@ -7,14 +7,12 @@ on:
 jobs:
   nix-build:
     name: build
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v30
-      - run: "nix-channel --add https://nixos.org/channels/nixos-24.05 nixpkgs"
-      - run: nix-channel --update
-      - run: nix-build
-      - run: cp result res.dll
+      - uses: actions/setup-go@v5
+      - run: go build -buildmode=c-shared main.go
+      - run: cp idk.dll res.dll
       - uses: actions/upload-artifact@v4
         with:
           name: pabc-parse-dll
