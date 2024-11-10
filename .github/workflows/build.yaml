@@ -11,8 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
-      - run: go build -buildmode=c-shared main.go
-      - run: cp idk.dll res.dll
+      - run: go build -buildmode=c-shared -o res.dll main.go 
       - uses: actions/upload-artifact@v4
         with:
           name: pabc-parse-dll
